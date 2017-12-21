@@ -10,7 +10,7 @@ class Todo extends Component {
 				this.createTodo('Make a cake', false),
 				this.createTodo('Go for beer', false),
 			]
-		}
+		};
 
 		this.handleCreateTodo = this.handleCreateTodo.bind(this);
 		this.handleCompleteTodo = this.handleCompleteTodo.bind(this);
@@ -22,7 +22,7 @@ class Todo extends Component {
 	 *
 	 * @param title
 	 * @param completed
-	 * @returns {{title: *, completed: *}}
+	 * @returns {{title: string, completed: boolean}}
 	 */
 	createTodo(title, completed) {
 		return {
@@ -75,29 +75,29 @@ class Todo extends Component {
 		);
 	}
 
-	handleCreateTodo(event) {
-		const titleinput = document.getElementById('todo-title');
+	handleCreateTodo() {
+		const titleInput = document.getElementById('todo-title');
 
-		if (!titleinput.value.length) {
+		if (!titleInput.value.length) {
 			alert('Please provide todo title.');
 			return;
 		}
 
-		var todos = this.state.todos;
+		const todos = this.state.todos;
 		todos.push(
-			this.createTodo(titleinput.value)
+			this.createTodo(titleInput.value)
 		);
 		this.setState({
 			todos: todos
 		});
 
-		titleinput.value = null;
+		titleInput.value = null;
 	}
 
 	handleCompleteTodo(event) {
 		const button = event.target;
 
-		var todos = this.state.todos.map((todo, index) => {
+		const todos = this.state.todos.map((todo, index) => {
 			if (button.value == index)
 				todo.completed = !todo.completed;
 
@@ -109,7 +109,7 @@ class Todo extends Component {
 		});
 
 		if (button.innerText === 'V')
-			button.innerText = 'X'
+			button.innerText = 'X';
 		else
 			button.innerText = 'V';
 	}
@@ -117,7 +117,7 @@ class Todo extends Component {
 	handleRemoveTodo(event) {
 		const button = event.target;
 
-		var todos = this.state.todos.filter((todo, index) => {
+		const todos = this.state.todos.filter((todo, index) => {
 			if (button.value != index)
 				return true;
 		});
