@@ -14,6 +14,7 @@ class Todo extends Component {
 
 		this.handleCreateTodo = this.handleCreateTodo.bind(this);
 		this.handleCompleteTodo = this.handleCompleteTodo.bind(this);
+		this.handleRemoveTodo = this.handleRemoveTodo.bind(this);
 	}
 
 	/**
@@ -33,9 +34,9 @@ class Todo extends Component {
 	listTodos() {
 		const list = this.state.todos.map((todo, index) =>
 			<tr key={index}>
-				<td>{todo.completed? 1 : 0} {todo.title}</td>
+				<td className={todo.completed? 'completed' : ''}>{todo.title}</td>
 				<td><button name="complete" value={index} onClick={this.handleCompleteTodo}>V</button></td>
-				<td><button name="remove" value={index}>X</button></td>
+				<td><button name="remove" value={index} onClick={this.handleRemoveTodo}>X</button></td>
 			</tr>
 		);
 
@@ -101,7 +102,7 @@ class Todo extends Component {
 				todo.completed = !todo.completed;
 
 			return todo;
-		})
+		});
 
 		this.setState({
 			todos: todos
@@ -111,6 +112,19 @@ class Todo extends Component {
 			button.innerText = 'X'
 		else
 			button.innerText = 'V';
+	}
+
+	handleRemoveTodo(event) {
+		const button = event.target;
+
+		var todos = this.state.todos.filter((todo, index) => {
+			if (button.value != index)
+				return true;
+		});
+
+		this.setState({
+			todos: todos
+		});
 	}
 }
 

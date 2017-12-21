@@ -46,3 +46,7 @@
   border: 1px solid #222;
   box-shadow: 0px 1px 1px #222;
 }
+
+.completed {
+  text-decoration: line-through;
+}
